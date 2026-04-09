@@ -5,8 +5,9 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 8080;
 
-// 🔥 OpenAI
+// 🔥 OpenAI（新版寫法）
 const OpenAI = require("openai");
+
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -19,23 +20,29 @@ app.get("/", (req, res) => {
 // 🔥 GPT Chat API
 app.post("/chat", async (req, res) => {
   try {
+    console.log("收到:", req.body);
+
     const message = req.body.message;
 
     const completion = await client.chat.completions.create({
       model: "gpt-4.1-mini",
       messages: [
-        { role: "system", content: "你是一個聰明的AI助手" },
+        { role: "system", content: "你是一個親切的AI助手" },
         { role: "user", content: message },
       ],
     });
 
-    const reply = completion.choices[0].message.content;
-
-    res.json({ reply });
+    res.json({
+      reply: completion.choices[0].message.content,
+    });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "出錯了" });
+    console.error("錯誤:", err);
+
+    res.status(500).json({
+      error: "GPT 爆了",
+      detail: err.message,
+    });
   }
 });
 

@@ -1,22 +1,15 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Xiang-Ke API is running 🚀");
-});
-
-app.get("/ai", (req, res) => {
-  const samples = [
-    { comment: "鳳山鹹酥雞哪間好吃？", level: "HIGH" },
-    { comment: "前鎮雞排變貴了", level: "LOW" },
-    { comment: "瑞北夜市最近人變多", level: "MID" }
-  ];
-
-  const pick = samples[Math.floor(Math.random() * samples.length)];
-  res.json(pick);
-});
-
+// Railway 必須用這個 PORT
 const PORT = process.env.PORT || 3000;
+
+// 測試首頁
+app.get("/", (req, res) => {
+  res.send("🚀 API is running!");
+});
+
+// 啟動 server（超重要）
 app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+  console.log(`Server running on port ${PORT}`);
 });

@@ -5,22 +5,22 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 
-// 🔥 基本測試
+// 基本測試
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
 });
 
-// 🔥 測試 API
+// 測試 API
 app.get("/test", (req, res) => {
   res.json({ message: "Hello API!" });
 });
 
-// 🔥 模擬聊天 API（之後可接 GPT）
+// 🔥 AI 聊天 API（現在先假資料，下一步接 GPT）
 app.post("/chat", (req, res) => {
   const { message } = req.body;
 
   res.json({
-    reply: `你剛剛說的是：${message}`
+    reply: `🤖 AI回覆：我收到「${message}」`
   });
 });
 

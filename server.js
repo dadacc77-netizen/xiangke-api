@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json()); // 🔥 這行一定要有
+const express = require("express");
+const app = express();
+
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
